@@ -1,0 +1,18 @@
+server {
+    listen   80;
+    server localhost;
+
+location /static {
+    proxy_pass http:://task5_nginx_static_1:1200/;
+    proxy_set_header: X-Forwarded-For $remote_addr;
+
+    root /var/www/html;
+    index index.htm index.html;
+  }
+
+location / {
+    proxy_pass http:://task5_flask_1:8080/;
+    proxy_set_header: X-Forwarded-For $remote_addr
+}
+
+}
